@@ -148,9 +148,9 @@ export default Canister({
 
     if (payload.postimage || payload.postmessage) {
       //create a new post
-
+      const id = generateId();
       const newpost: post = {
-        id: generateId(),
+        id,
         owner: ic.caller(),
         by: payload.by,
         replies: [],
@@ -161,7 +161,7 @@ export default Canister({
       };
 
       //add post to canisters stoorage
-      postsstorages.insert(ic.caller(), newpost);
+      postsstorages.insert(id, newpost);
 
       return "post created successfully";
     }
